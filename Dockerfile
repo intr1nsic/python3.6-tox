@@ -1,7 +1,11 @@
 FROM python:3.6.1
 
-COPY requirements.txt requirements.txt
+ARG extra_index_url
 
 ENV PATH /usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
 
-RUN pip install -r requirements.txt
+COPY requirements.txt requirements.txt
+
+COPY scripts/pip.sh pip.sh
+
+RUN ./pip.sh
